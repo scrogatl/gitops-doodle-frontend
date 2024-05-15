@@ -1,8 +1,4 @@
-# rafay-gitops-test
+# GitOps Microservice Example
 
-Added docker push
+## This is the frontend for doodle
 
-Another change
-# gitops-doodle-frontend
-# gitops-doodle-frontend
-# gitops-doodle-frontend
