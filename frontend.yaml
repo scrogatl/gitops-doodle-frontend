@@ -6,7 +6,7 @@ metadata:
     service: frontend
     version: blue
     shard: blue
-  name: frontend-blue
+  name: frontend
   namespace: supreme-doodle
 spec:
   replicas: 1
