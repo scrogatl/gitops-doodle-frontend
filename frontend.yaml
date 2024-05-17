@@ -29,7 +29,6 @@ spec:
         # image: public.ecr.aws/z4m0n1r4/frontend
         image: ghcr.io/scrogatl/doodle-frontend:latest
         imagePullPolicy: Always
-      
         env:
         - name: HELLO_HOST
           value: "hello"
@@ -45,8 +44,8 @@ spec:
         - containerPort: 5000
           name: application
           protocol: TCP
-      imagePullSecrets:
-      - name: ghcr-login-secret
+      # imagePullSecrets:
+      # - name: ghcr-login-secret
 ---
 apiVersion: v1
 kind: Service
