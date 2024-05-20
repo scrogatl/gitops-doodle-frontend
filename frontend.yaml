@@ -44,8 +44,6 @@ spec:
         - containerPort: 5000
           name: application
           protocol: TCP
-      # imagePullSecrets:
-      # - name: ghcr-login-secret
 ---
 apiVersion: v1
 kind: Service
@@ -58,7 +56,26 @@ spec:
     service: frontend  
   type: ClusterIP
   ports:
-  - name: http
-    # protocol: TCP
-    appProtocol: http
+  - protocol: TCP
     port: 5000
+    targetPort: 5000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: doodle-frontend
+  namespace: supreme-doodle
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /doodle
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend
+            port:
+              number: 5000
