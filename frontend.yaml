@@ -40,8 +40,6 @@ spec:
           value: "blue"
         - name: PYTHONUNBUFFERED
           value: "1"
-        -name: version
-          value: "v0.99.01"
         ports:
         - containerPort: 5000
           name: application
