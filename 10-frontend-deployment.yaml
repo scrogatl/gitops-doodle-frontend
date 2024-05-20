@@ -6,6 +6,7 @@ metadata:
     service: frontend
     version: blue
     shard: blue
+    doodle-version: v0.99.01
   name: frontend
   namespace: supreme-doodle
 spec:
