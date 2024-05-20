@@ -5,7 +5,7 @@ metadata:
     application: helloworld
     service: frontend
     version: blue
-    shard: blue
+    shard: blue-ish
   name: frontend
   namespace: supreme-doodle
 spec:
@@ -15,14 +15,14 @@ spec:
       application: helloworld
       service: frontend
       version: blue
-      shard: blue
+      shard: blue-ish
   template:
     metadata:
       labels:
         application: helloworld
         service: frontend
         version: blue
-        shard: blue
+        shard: blue-ish
     spec:
       containers:
       - name: frontend
