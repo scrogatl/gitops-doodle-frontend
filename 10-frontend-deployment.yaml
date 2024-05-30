@@ -42,7 +42,7 @@ spec:
         - name: PYTHONUNBUFFERED
           value: "1"
         - name: DOODLE-VERSION
-          value: "V0.99.1"
+          value: "V0.99.2"
         ports:
         - containerPort: 5000
           name: application
