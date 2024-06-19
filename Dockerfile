@@ -19,7 +19,7 @@ EXPOSE 5000
 
 
 RUN --mount=type=secret,id=nr_key \
-   NEW_RELIC_LICENSE_KEY=`cat /run/secrets/nr_key`
+   cat /run/secrets/nr_key
 # ENV NEW_RELIC_LICENSE_KEY=$NEW_RELIC_LICENSE_KEY
 # ARG nr_key
 # ENV NEW_RELIC_LICENSE_KEY=$nr_key
