@@ -67,7 +67,7 @@ def front_end():
         res += " world status:" + repr(e)
 
 
-    print (resLocal + res)
+    # print (resLocal + res)
     # print("Hello status: " + str(resH.status_code))
     # print("Hello text: " + resH.text)
     # print("World status: " + str(resW.status_code))
