@@ -22,10 +22,12 @@ jobs:
           username: scrogatl
           password: ${{secrets.GITHUB_TOKEN}}      
 
-      - name: 'Build Inventory Image'
+      - name: Build
+        uses: docker/build-push-action@v6
         with:
           secrets: |
             "NEW_RELIC_LICENSE_KEY=${{ secrets.NEW_RELIC_LICENSE_KEY}}
-        run: |
-          docker build . --tag ghcr.io/scrogatl/doodle-frontend:latest
-          docker push ghcr.io/scrogatl/doodle-frontend:latest
+          tags: ghcr.io/scrogatl/doodle-frontend:latest
+        # run: |
+        #   docker build . --tag ghcr.io/scrogatl/doodle-frontend:latest
+        #   docker push ghcr.io/scrogatl/doodle-frontend:latest
