@@ -17,7 +17,9 @@ COPY frontend/src/ /frontend
 
 EXPOSE 5000
 
-ENV NEW_RELIC_LICENSE_KEY=${{secrets.NEW_RELIC_LICENSE_KEY}}      
+RUN --mount=type=secret,id=NEW_RELIC_LICENSE_KEY
+
+ENV NEW_RELIC_LICENSE_KEY=/run/secrets/NEW_RELIC_LICENSE_KEY    
 ENV NEW_RELIC_APP_NAME=doodle-fronend
 
 CMD newrelic-admin run-program flask run --host=0.0.0.0 -p 5000
