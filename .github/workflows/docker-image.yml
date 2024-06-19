@@ -23,8 +23,6 @@ jobs:
           password: ${{secrets.GITHUB_TOKEN}}      
 
       - name: 'Build Inventory Image'
-        env: 
-          NEW_RELIC_LICENSE_KEY: ${{ secrets.NEW_RELIC_LICENSE_KEY }}
         run: |
-          docker build . --build-arg NEW_RELIC_LICENSE_KEY=$NEW_RELIC_LICENSE_KEY --tag ghcr.io/scrogatl/doodle-frontend:latest
+          docker build . --secret  NEW_RELIC_LICENSE_KEY=${{ secrets.NEW_RELIC_LICENSE_KEY }} --tag ghcr.io/scrogatl/doodle-frontend:latest
           docker push ghcr.io/scrogatl/doodle-frontend:latest
