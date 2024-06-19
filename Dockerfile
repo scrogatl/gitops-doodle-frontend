@@ -18,8 +18,8 @@ COPY frontend/src/ /frontend
 EXPOSE 5000
 
 
-RUN --mount=type=secret,id=nr_key \
-   cat /run/secrets/nr_key
+RUN --mount=type=secret,id=nr_key 
+RUN cat /run/secrets/nr_key
 # ENV NEW_RELIC_LICENSE_KEY=$NEW_RELIC_LICENSE_KEY
 # ARG nr_key
 # ENV NEW_RELIC_LICENSE_KEY=$nr_key
