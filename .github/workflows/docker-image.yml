@@ -26,7 +26,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           secrets: |
-            "NEW_RELIC_LICENSE_KEY=${{ secrets.NEW_RELIC_LICENSE_KEY}}"
+            "nr_key=${{ secrets.NR_KEY}}"
           tags: ghcr.io/scrogatl/doodle-frontend:latest
         # run: |
         #   docker build . --tag ghcr.io/scrogatl/doodle-frontend:latest

@@ -18,8 +18,8 @@ COPY frontend/src/ /frontend
 EXPOSE 5000
 
 
-RUN --mount=type=secret,id=NEW_RELIC_LICENSE_KEY \
-NEW_RELIC_LICENSE_KEY=cat `/run/secrets/NEW_RELIC_LICENSE_KEY`
+RUN --mount=type=secret,id=nr_key \
+NEW_RELIC_LICENSE_KEY=cat `/run/secrets/nr-key`
 ENV NEW_RELIC_LICENSE_KEY=$NEW_RELIC_LICENSE_KEY
 ENV NEW_RELIC_APP_NAME=doodle-frontend
 
