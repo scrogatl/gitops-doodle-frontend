@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    application: helloworld
+    service: frontend
+    version: blue
+    shard: blue
+    doodle-version: v0.99.01
+  name: frontend
+  namespace: supreme-doodle
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      application: helloworld
+      service: frontend
+      version: blue
+      shard: blue
+  template:
+    metadata:
+      labels:
+        application: helloworld
+        service: frontend
+        version: blue
+        shard: blue
+    spec:
+      containers:
+      - name: frontend
+        # image: public.ecr.aws/z4m0n1r4/frontend
+        image: ghcr.io/scrogatl/doodle-frontend:latest
+        imagePullPolicy: Always
+        env:
+        - name: HELLO_HOST
+          value: "hello"
+          # value: "hello.demo.internal"
+        - name: WORLD_HOST
+          value: "world"
+          # value: "world.demo.internal"
+        - name: SHARD
+          value: "blue"
+        - name: PYTHONUNBUFFERED
+          value: "1"
+        - name: DOODLE-VERSION
+          value: "V0.99.2"
+        - name: NEW_RELIC_LICENSE_KEY
+          value:  "{{ .Values.nr_key }}"
+        ports:
+        - containerPort: 5000
+          name: application
+          protocol: TCP
