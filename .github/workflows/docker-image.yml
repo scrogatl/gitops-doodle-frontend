@@ -29,5 +29,5 @@ jobs:
         #     "nr_key=${{ secrets.NR_KEY}}"
         #   tags: ghcr.io/scrogatl/doodle-frontend:latest
         run: |
-          docker build . --tag ghcr.io/scrogatl/doodle-frontend:latest --build-arg nr_key=${{ secrets.NR_KEY }}
+          docker build . --tag ghcr.io/scrogatl/doodle-frontend:latest 
           docker push ghcr.io/scrogatl/doodle-frontend:latest
