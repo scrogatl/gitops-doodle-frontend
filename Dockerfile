@@ -17,7 +17,6 @@ COPY frontend/src/ /frontend
 
 EXPOSE 5000
 
-
 ENV NEW_RELIC_APP_NAME=doodle-frontend
 
 CMD newrelic-admin run-program flask run --host=0.0.0.0 -p 5000
