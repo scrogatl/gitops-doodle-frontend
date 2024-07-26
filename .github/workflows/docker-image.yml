@@ -18,16 +18,10 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          # username: ${{github.actor}}
           username: scrogatl
           password: ${{secrets.GITHUB_TOKEN}}      
 
       - name: Build
-        # uses: docker/build-push-action@v6
-        # with:
-        #   secrets: |
-        #     "nr_key=${{ secrets.NR_KEY}}"
-        #   tags: ghcr.io/scrogatl/doodle-frontend:latest
         run: |
           docker build . --tag ghcr.io/scrogatl/doodle-frontend:latest 
           docker push ghcr.io/scrogatl/doodle-frontend:latest
