@@ -35,6 +35,7 @@ def which_world():
 
 @app.route("/")
 def front_end():
+    logit("handling /")
     res = ""
     try:
         resH = requests.get('http://' + helloHost + ':5001')
@@ -57,5 +58,4 @@ def front_end():
         res += " world status:" + repr(e)
 
     logit (res)
-    # print (timeString + res)
     return res
