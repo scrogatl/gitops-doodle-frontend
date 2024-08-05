@@ -18,11 +18,14 @@ worldHostRuby = os.environ.get('WORLD_HOST_RUBY', "localhost")
 worldPort = os.environ.get('WORLD_PORT', "5002")
 worldPortRuby = os.environ.get('WORLD_PORT_RUBY', "5002")
 shard = os.environ.get('SHARD', "na")
-print(" [frontend: " + shard + "] - " + " initialized]")
 
 def logit(message):
     timeString = datetime.now().strftime("%H:%M:%S.%f")[:-3]
     print(timeString + " - [frontend: " + shard + "] - " + message)
+
+logit("worldHost: " + worldHost )
+logit("worldHostRuby: " + worldHostRuby )
+logit( "initialized")
 
 
 def which_world():
