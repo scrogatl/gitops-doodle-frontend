@@ -35,8 +35,12 @@ spec:
           value: "hello"
         - name: WORLD_HOST
           value: "world"
+        - name: WORLD_PORT
+          value: "5002"
         - name: WORLD_HOST_RUBY
-          value: "world"
+          value: "world-ruby"
+        - name: WORLD_PORT_RUBY
+          value: "5003"
         - name: SHARD
           value: "blue"
         - name: PYTHONUNBUFFERED
