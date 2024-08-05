@@ -15,8 +15,8 @@ app = Flask(__name__)
 helloHost = os.environ.get('HELLO_HOST', "localhost")
 worldHost = os.environ.get('WORLD_HOST', "localhost")
 worldHostRuby = os.environ.get('WORLD_HOST_RUBY', "localhost")
-worldPort = '5002'
-# endpoint  = os.environ.get('OTEL_EXPORTER_OTLP_ENDPOINT', "localhost")
+worldPort = os.environ.get('WORLD_PORT', "5002")
+worldPortRuby = os.environ.get('WORLD_PORT_RUBY', "5002")
 shard = os.environ.get('SHARD', "na")
 print(" [frontend: " + shard + "] - " + " initialized]")
 
@@ -24,13 +24,15 @@ def which_world():
     global worldHost
     global worldHostRuby
     global worldPort
+    global worldPortRuby
+
     r = randrange(100)
     timeString = datetime.now().strftime("%H:%M:%S.%f")[:-3]
     print(timeString + " - [frontend: " + shard + "] - " + " random=" + str(r))
     if r > 49:
-        return worldHostRuby, '5003'
+        return worldHostRuby, worldPortRuby
     else: 
-        return worldHost, '5002'
+        return worldHost, worldPort
 
 @app.route("/")
 def front_end():
@@ -48,8 +50,8 @@ def front_end():
 
     try: 
         lHost, lPort = which_world()
+        # print(timeString +  " - [frontend] - " + lHost + ":" + lPort)
         resW = requests.get('http://' + lHost + ':' + lPort)
-        
         if resW.status_code >= 300:
             res += " | world status: " + str(resW.status_code) + " - " + resW.text + " - " + " | worldHost: " + worldHost
         else:
