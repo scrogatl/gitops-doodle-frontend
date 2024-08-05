@@ -24,7 +24,9 @@ def logit(message):
     print(timeString + " - [frontend: " + shard + "] - " + message)
 
 logit("worldHost: " + worldHost )
+logit("worldPort: " + worldPort)
 logit("worldHostRuby: " + worldHostRuby )
+logit("worldPortRuby: " + worldPortRuby)
 logit( "initialized")
 
 
