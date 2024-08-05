@@ -35,7 +35,7 @@ def which_world():
 
 @app.route("/")
 def front_end():
-    logit("handling /")
+    # logit("handling /")
     res = ""
     try:
         resH = requests.get('http://' + helloHost + ':5001')
