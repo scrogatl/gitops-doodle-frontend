@@ -20,15 +20,14 @@ worldPortRuby = os.environ.get('WORLD_PORT_RUBY', "5002")
 shard = os.environ.get('SHARD', "na")
 print(" [frontend: " + shard + "] - " + " initialized]")
 
-def which_world():
-    global worldHost
-    global worldHostRuby
-    global worldPort
-    global worldPortRuby
-
-    r = randrange(100)
+def logit(message):
     timeString = datetime.now().strftime("%H:%M:%S.%f")[:-3]
-    print(timeString + " - [frontend: " + shard + "] - " + " random=" + str(r))
+    print(timeString + " - [frontend: " + shard + "] - " + message)
+
+
+def whichWorld():
+    r = randrange(100)
+    logit("random = " + str(r))
     if r > 49:
         return worldHostRuby, worldPortRuby
     else: 
@@ -36,21 +35,18 @@ def which_world():
 
 @app.route("/")
 def front_end():
-    timeString = datetime.now().strftime("%H:%M:%S.%f")[:-3]
-    # res = " - [frontend: " + shard + " ]- hello host: " + helloHost + " ]"
-    res = " - [frontend: " + shard + "]"
+    res = ""
     try:
         resH = requests.get('http://' + helloHost + ':5001')
         if resH.status_code >= 300:
-            res += " hello status: " + str(resH.status_code) + " - " + resH.text 
+            res += "hello status: " + str(resH.status_code) + " - " + resH.text 
         else:
-            res += " hello status: " + str(resH.status_code) + " - " + resH.text 
+            res += "hello status: " + str(resH.status_code) + " - " + resH.text 
     except Exception as e:
-        res += " hello status: " + repr(e)
+        res += "hello status: " + repr(e)
 
     try: 
-        lHost, lPort = which_world()
-        # print(timeString +  " - [frontend] - " + lHost + ":" + lPort)
+        lHost, lPort = whichWorld()
         resW = requests.get('http://' + lHost + ':' + lPort)
         if resW.status_code >= 300:
             res += " | world status: " + str(resW.status_code) + " - " + resW.text + " - " + " | worldHost: " + worldHost
@@ -59,5 +55,6 @@ def front_end():
     except Exception as e:
         res += " world status:" + repr(e)
 
-    print (timeString + res)
+    logit (res)
+    # print (timeString + res)
     return res
