@@ -12,11 +12,11 @@ log.setLevel(logging.ERROR)
 
 app = Flask(__name__)
 
-helloHost = os.environ.get('HELLO_HOST', "localhost")
-worldHost = os.environ.get('WORLD_HOST', "localhost")
+helloHost     = os.environ.get('HELLO_HOST', "localhost")
+worldHost     = os.environ.get('WORLD_HOST', "localhost")
 worldHostRuby = os.environ.get('WORLD_HOST_RUBY', "localhost")
-worldPort = os.environ.get('WORLD_PORT', "5002")
-worldPortRuby = os.environ.get('WORLD_PORT_RUBY', "5002")
+worldPort     = os.environ.get('WPORT', "5002")
+worldPortRuby = os.environ.get('WPORT_RUBY', "5002")
 shard = os.environ.get('SHARD', "na")
 
 def logit(message):
