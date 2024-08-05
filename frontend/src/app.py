@@ -25,7 +25,7 @@ def logit(message):
     print(timeString + " - [frontend: " + shard + "] - " + message)
 
 
-def whichWorld():
+def which_world():
     r = randrange(100)
     logit("random = " + str(r))
     if r > 49:
@@ -46,7 +46,8 @@ def front_end():
         res += "hello status: " + repr(e)
 
     try: 
-        lHost, lPort = whichWorld()
+        lHost, lPort = which_world()
+        logit(lHost + ":" + lPort)
         resW = requests.get('http://' + lHost + ':' + lPort)
         if resW.status_code >= 300:
             res += " | world status: " + str(resW.status_code) + " - " + resW.text + " - " + " | worldHost: " + worldHost

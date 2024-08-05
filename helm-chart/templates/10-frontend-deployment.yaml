@@ -33,12 +33,10 @@ spec:
         env:
         - name: HELLO_HOST
           value: "hello"
-          # value: "hello.demo.internal"
         - name: WORLD_HOST
           value: "world"
         - name: WORLD_HOST_RUBY
           value: "world"
-          # value: "world.demo.internal"
         - name: SHARD
           value: "blue"
         - name: PYTHONUNBUFFERED
