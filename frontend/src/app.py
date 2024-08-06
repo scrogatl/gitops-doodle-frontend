@@ -58,7 +58,7 @@ def front_end():
         res += " | world status: " + str(resW.status_code) + " - " + resW.text 
     except Exception as e:
         httpStatus = 500
-        res += " world status:" + repr(e)
+        res += " world status: " + repr(e)
 
     logit (res)
     return res,  httpStatus
