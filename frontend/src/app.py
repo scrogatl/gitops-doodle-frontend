@@ -17,7 +17,7 @@ worldHost     = os.environ.get('WORLD_HOST', "localhost")
 worldHostRuby = os.environ.get('WORLD_HOST_RUBY', "localhost")
 worldPort     = os.environ.get('WPORT', "5002")
 worldPortRuby = os.environ.get('WPORT_RUBY', "5002")
-shard = os.environ.get('SHARD', "na")
+shard         = os.environ.get('SHARD', "na")
 
 def logit(message):
     timeString = datetime.now().strftime("%H:%M:%S.%f")[:-3]
@@ -40,14 +40,13 @@ def which_world():
 
 @app.route("/")
 def front_end():
+    httpStatus = 200
     # logit("handling /")
     res = ""
     try:
         resH = requests.get('http://' + helloHost + ':5001')
-        if resH.status_code >= 300:
-            res += "hello status: " + str(resH.status_code) + " - " + resH.text 
-        else:
-            res += "hello status: " + str(resH.status_code) + " - " + resH.text 
+        httpStatus = resH.status_code
+        res += "hello status: " + str(resH.status_code) + " - " + resH.text 
     except Exception as e:
         res += "hello status: " + repr(e)
 
@@ -55,12 +54,11 @@ def front_end():
         lHost, lPort = which_world()
         logit(lHost + ":" + lPort)
         resW = requests.get('http://' + lHost + ':' + lPort)
-        if resW.status_code >= 300:
-            res += " | world status: " + str(resW.status_code) + " - " + resW.text + " - " + " | worldHost: " + worldHost
-        else:
-            res += " | world status: " + str(resW.status_code) + " - " + resW.text 
+        httpStatus = resW.status_code
+        res += " | world status: " + str(resW.status_code) + " - " + resW.text 
     except Exception as e:
+        httpStatus = 500
         res += " world status:" + repr(e)
 
     logit (res)
-    return res
+    return res,  httpStatus
