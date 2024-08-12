@@ -32,10 +32,12 @@ logit( "initialized")
 
 def which_world():
     r = randrange(100)
-    logit("random = " + str(r))
+    # logit("random = " + str(r))
     if r > 49:
+        logit("world-ruby")
         return worldHostRuby, worldPortRuby
     else: 
+        logit("world-python")
         return worldHost, worldPort
 
 @app.route("/")
