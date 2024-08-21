@@ -29,9 +29,9 @@ logit("worldHostRuby: " + worldHostRuby )
 logit("worldPortRuby: " + worldPortRuby)
 logit( "initialized")
 
-def generate_acct_num()
-    r = randmomrange(10000)
-    return r 
+def generate_acct_num():
+    r = randrange(10000)
+    return str(r) 
 
 def which_world():
     r = randrange(100)
