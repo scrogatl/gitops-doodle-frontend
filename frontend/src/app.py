@@ -29,6 +29,9 @@ logit("worldHostRuby: " + worldHostRuby )
 logit("worldPortRuby: " + worldPortRuby)
 logit( "initialized")
 
+def generate_acct_num()
+    r = randmomrange(10000)
+    return r 
 
 def which_world():
     r = randrange(100)
@@ -46,7 +49,7 @@ def front_end():
     # logit("handling /")
     res = ""
     try:
-        resH = requests.get('http://' + helloHost + ':5001')
+        resH = requests.get('http://' + helloHost + ':5001' + "?account=" + generate_acct_num())
         httpStatus = resH.status_code
         res += "hello status: " + str(resH.status_code) + " - " + resH.text 
     except Exception as e:
@@ -64,3 +67,4 @@ def front_end():
 
     logit (res)
     return res,  httpStatus
+

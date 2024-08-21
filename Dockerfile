@@ -1,12 +1,12 @@
-FROM python:3.10-slim-bullseye as base
+FROM python:3.10-slim-bullseye 
 
-FROM base as builder
+# FROM base AS builder
 
-RUN apt update && apt install git python3-pip -y
-RUN apt install bash -y
-RUN apt autoremove
+# RUN apt update && apt install git python3-pip -y
+# RUN apt install bash -y
+# RUN apt autoremove
 
-FROM base
+# FROM base
 
 WORKDIR /frontend
 
@@ -19,4 +19,5 @@ EXPOSE 5000
 
 ENV NEW_RELIC_APP_NAME=doodle-frontend
 
-CMD newrelic-admin run-program flask run --host=0.0.0.0 -p 5000
+# CMD newrelic-admin run-program flask run --host=0.0.0.0 -p 5000
+CMD  flask run --host=0.0.0.0 -p 5000
