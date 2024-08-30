@@ -30,7 +30,7 @@ logit("worldPortRuby: " + worldPortRuby)
 logit( "initialized")
 
 def generate_acct_num():
-    r = randmomrange(10000)
+    r = randrange(10000)
     return r 
 
 def which_world():
