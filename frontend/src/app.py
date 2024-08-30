@@ -31,7 +31,7 @@ logit( "initialized")
 
 def generate_acct_num():
     r = randrange(10000)
-    return r 
+    return str(r) 
 
 def which_world():
     r = randrange(100)
