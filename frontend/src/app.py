@@ -8,7 +8,7 @@ from random import randrange
 import logging
 
 log = logging.getLogger('werkzeug')
-log.setLevel(logging.ERROR)
+log.setLevel(logging.INFO)
 
 app = Flask(__name__)
 
@@ -21,7 +21,8 @@ shard         = os.environ.get('SHARD', "na")
 
 def logit(message):
     timeString = datetime.now().strftime("%H:%M:%S.%f")[:-3]
-    print(timeString + " - [frontend: " + shard + "] - " + message)
+    # print(timeString + " - [frontend: " + shard + "] - " + message)
+    log.info(timeString + " - [frontend: " + shard + "] - " + message)
 
 logit("worldHost: " + worldHost )
 logit("worldPort: " + worldPort)
