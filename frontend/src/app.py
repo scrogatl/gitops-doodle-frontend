@@ -37,7 +37,7 @@ def generate_acct_num():
 
 def which_world():
     r = randrange(100)
-    if r > whichWorld:
+    if r > int(whichWorld):
         logit("world-ruby")
         return worldHostRuby, worldPortRuby
     else: 
