@@ -24,12 +24,12 @@ def logit(message):
     timeString = datetime.now().strftime("%H:%M:%S.%f")[:-3]
     log.info(timeString + " - [frontend: " + shard + "] - " + message)
 
-logit("worldHost: " + worldHost )
-logit("worldPort: " + worldPort)
-logit("worldHostRuby: " + worldHostRuby )
-logit("worldPortRuby: " + worldPortRuby)
-logit("whichWorld: " + whichWorld)
-logit( "initialized")
+# logit("worldHost: " + worldHost )
+# logit("worldPort: " + worldPort)
+# logit("worldHostRuby: " + worldHostRuby )
+# logit("worldPortRuby: " + worldPortRuby)
+# logit("whichWorld: " + whichWorld)
+# logit( "initialized")
 
 def generate_acct_num():
     r = randrange(10000)
