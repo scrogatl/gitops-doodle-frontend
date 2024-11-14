@@ -47,6 +47,8 @@ spec:
           value: "1"
         - name: DOODLE-VERSION
           value: "V0.99.3"
+        - name: WHICH_WORLD
+          value: "50"
         - name: NEW_RELIC_LICENSE_KEY
           value:  "{{ .Values.nr_key }}"
         ports:

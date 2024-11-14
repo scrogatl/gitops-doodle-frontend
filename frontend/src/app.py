@@ -18,16 +18,17 @@ worldHostRuby = os.environ.get('WORLD_HOST_RUBY', "localhost")
 worldPort     = os.environ.get('WPORT', "5002")
 worldPortRuby = os.environ.get('WPORT_RUBY', "5002")
 shard         = os.environ.get('SHARD', "na")
+whichWorld    = os.environ.get('WHICH_WORLD', "50")
 
 def logit(message):
     timeString = datetime.now().strftime("%H:%M:%S.%f")[:-3]
-    # print(timeString + " - [frontend: " + shard + "] - " + message)
     log.info(timeString + " - [frontend: " + shard + "] - " + message)
 
 logit("worldHost: " + worldHost )
 logit("worldPort: " + worldPort)
 logit("worldHostRuby: " + worldHostRuby )
 logit("worldPortRuby: " + worldPortRuby)
+logit("whichWorld: " + whichWorld)
 logit( "initialized")
 
 def generate_acct_num():
@@ -36,8 +37,7 @@ def generate_acct_num():
 
 def which_world():
     r = randrange(100)
-    # logit("random = " + str(r))
-    if r > 30:
+    if r > whichWorld:
         logit("world-ruby")
         return worldHostRuby, worldPortRuby
     else: 
