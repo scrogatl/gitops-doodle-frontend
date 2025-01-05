@@ -8,7 +8,7 @@ from random import randrange
 import logging
 
 log = logging.getLogger('werkzeug')
-log.setLevel(logging.INFO)
+log.setLevel(logging.DEBUG)
 
 app = Flask(__name__)
 
@@ -23,6 +23,8 @@ whichWorld    = os.environ.get('WHICH_WORLD', "50")
 def logit(message):
     timeString = datetime.now().strftime("%H:%M:%S.%f")[:-3]
     log.info(timeString + " - [frontend: " + shard + "] - " + message)
+    print(timeString + " - [frontend: " + shard + "] - " + message)
+    
 
 # logit("worldHost: " + worldHost )
 # logit("worldPort: " + worldPort)
