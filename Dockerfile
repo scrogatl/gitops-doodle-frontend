@@ -30,5 +30,5 @@ RUN opentelemetry-bootstrap -a install
 
 COPY frontend/src/ /frontend
 # CMD newrelic-admin run-program flask run --host=0.0.0.0 -p 5000
-# CMD flask run --host=0.0.0.0 -p 5000
-CMD opentelemetry-instrument --logs_exporter otlp flask run --debugger --host=0.0.0.0 -p 5000
+CMD flask run --host=0.0.0.0 -p 5000
+# CMD opentelemetry-instrument --logs_exporter otlp flask run --debugger --host=0.0.0.0 -p 5000
