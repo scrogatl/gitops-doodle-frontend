@@ -18,7 +18,7 @@ worldHostRuby = os.environ.get('WORLD_HOST_RUBY', "localhost")
 worldPort     = os.environ.get('WPORT', "5002")
 worldPortRuby = os.environ.get('WPORT_RUBY', "5002")
 shard         = os.environ.get('SHARD', "na")
-whichWorld    = os.environ.get('WHICH_WORLD', "50")
+rubyWorld    = os.environ.get('RUBY_WORLD', "50")
 
 def logit(message):
     timeString = datetime.now().strftime("%H:%M:%S.%f")[:-3]
@@ -30,16 +30,16 @@ def logit(message):
 # logit("worldPort: " + worldPort)
 # logit("worldHostRuby: " + worldHostRuby )
 # logit("worldPortRuby: " + worldPortRuby)
-# logit("whichWorld: " + whichWorld)
+# logit("rubyWorld: " + rubyWorld)
 # logit( "initialized")
 
 def generate_acct_num():
     r = randrange(10000)
     return str(r) 
 
-def which_world():
+def RUBY_WORLD():
     r = randrange(100)
-    if r > int(whichWorld):
+    if r < int(rubyWorld):
         logit("world-ruby")
         return worldHostRuby, worldPortRuby
     else: 
@@ -59,7 +59,7 @@ def front_end():
         res += "hello status: " + repr(e)
 
     try: 
-        lHost, lPort = which_world()
+        lHost, lPort = RUBY_WORLD()
         logit(lHost + ":" + lPort)
         resW = requests.get('http://' + lHost + ':' + lPort)
         httpStatus = resW.status_code
