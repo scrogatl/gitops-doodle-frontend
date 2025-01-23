@@ -34,7 +34,7 @@ spec:
         - name: HELLO_HOST
           value: "hello"
         - name: WORLD_HOST
-          value: "my-elb-1723391041.us-east-2.elb.amazonaws.com"
+          value: "world"
         - name: WORLD_HOST_RUBY
           value: "world-ruby"
         - name: WPORT
@@ -48,7 +48,7 @@ spec:
           value: "1"
         - name: DOODLE-VERSION
           value: "V0.99.4"
-        - name: WHICH_WORLD
+        - name: RUBY_WORLD
           value: "50"
         - name: NEW_RELIC_LICENSE_KEY
           value:  "{{ .Values.nr_key }}"
