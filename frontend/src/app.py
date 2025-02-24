@@ -23,21 +23,13 @@ rubyWorld    = os.environ.get('RUBY_WORLD', "50")
 def logit(message):
     timeString = datetime.now().strftime("%H:%M:%S.%f")[:-3]
     log.info(timeString + " - [frontend: " + shard + "] - " + message)
-    print(timeString + " - [frontend: " + shard + "] - " + message)
     
-
-# logit("worldHost: " + worldHost )
-# logit("worldPort: " + worldPort)
-# logit("worldHostRuby: " + worldHostRuby )
-# logit("worldPortRuby: " + worldPortRuby)
-# logit("rubyWorld: " + rubyWorld)
-# logit( "initialized")
 
 def generate_acct_num():
     r = randrange(10000)
     return str(r) 
 
-def RUBY_WORLD():
+def which_world_to_call():
     r = randrange(100)
     if r < int(rubyWorld):
         logit("world-ruby")
@@ -49,8 +41,7 @@ def RUBY_WORLD():
 @app.route("/")
 def front_end():
     httpStatus = 200
-    # logit("handling /")
-    res = ""
+    res = ''
     try:
         resH = requests.get('http://' + helloHost + ':5001' + "?account=" + generate_acct_num())
         httpStatus = resH.status_code
@@ -59,7 +50,7 @@ def front_end():
         res += "hello status: " + repr(e)
 
     try: 
-        lHost, lPort = RUBY_WORLD()
+        lHost, lPort = which_world_to_call()
         logit(lHost + ":" + lPort)
         resW = requests.get('http://' + lHost + ':' + lPort)
         httpStatus = resW.status_code
