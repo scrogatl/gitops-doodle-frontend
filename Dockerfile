@@ -15,7 +15,7 @@ RUN pip3 install -r requirements.txt
 
 EXPOSE 5000
 
-ENV NEW_RELIC_APP_NAME=doodle-frontend
+# ENV NEW_RELIC_APP_NAME=doodle-frontend
 # ENV OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED=true
 # ENV OTEL_SERVICE_NAME=frontend
 # ENV OTEL_RESOURCE_ATTRIBUTES=service.instance.id=19-4-6
@@ -29,6 +29,6 @@ ENV NEW_RELIC_APP_NAME=doodle-frontend
 # RUN opentelemetry-bootstrap -a install
 
 COPY frontend/src/ /frontend
-CMD newrelic-admin run-program flask run --host=0.0.0.0 -p 5000
-# CMD flask run --host=0.0.0.0 -p 5000
+# CMD newrelic-admin run-program flask run --host=0.0.0.0 -p 5000
+CMD flask run --host=0.0.0.0 -p 5000
 # CMD opentelemetry-instrument --logs_exporter otlp flask run --debugger --host=0.0.0.0 -p 5000
