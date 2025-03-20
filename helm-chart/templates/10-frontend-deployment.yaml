@@ -21,6 +21,7 @@ spec:
   template:
     metadata:
       labels:
+        app.kubernetes.io/name: frontend
         application: helloworld
         service: frontend
         version: blue
