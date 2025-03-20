@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app.kubernetes.io/name: helloword
+    app.kubernetes.io/name: helloworld
     application: helloworld
     service: frontend
     version: blue
