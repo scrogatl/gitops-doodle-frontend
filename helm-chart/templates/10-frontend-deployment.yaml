@@ -52,6 +52,8 @@ spec:
           value: "V0.99.4"
         - name: RUBY_WORLD
           value: "50"
+        - name: NEW_RELIC_APP_NAME
+          value: "doodle-frontend"
         - name: NEW_RELIC_LICENSE_KEY
           value:  "{{ .Values.nr_key }}"
         ports:
