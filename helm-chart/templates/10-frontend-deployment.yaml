@@ -57,7 +57,7 @@ spec:
           value: "50"
         - name: NEW_RELIC_APP_NAME
           value: "doodle-frontend"
-          - name: NEW_RELIC_LICENSE_KEY
+        - name: NEW_RELIC_LICENSE_KEY
           value:  "{{ .Values.nr_key }}"
         ports:
         - containerPort: 5000
