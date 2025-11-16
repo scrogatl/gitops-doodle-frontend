@@ -43,7 +43,8 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          # tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{branch}}
         # run: |
         #   docker build . --tag ghcr.io/scrogatl/doodle-frontend:latest 
         #   docker push ghcr.io/scrogatl/doodle-frontend:latest
