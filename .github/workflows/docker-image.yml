@@ -3,12 +3,6 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main", "newrelic"]
-    tags: 
-      - '*'
-
-  # workflow_dispatch:
-  #  branches: [ "main" ]
-
 
 jobs:
   build-push-frontend:
