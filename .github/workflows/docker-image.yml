@@ -45,7 +45,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: ./src
+          context: ./frontend/src
           file: ./iDockerfile
           platforms: linux/amd64
           push: true
