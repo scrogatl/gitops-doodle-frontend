@@ -24,8 +24,7 @@ jobs:
             ghcr.io/username/app
           # generate Docker tags based on the following events/attributes
           tags: |
-            type=schedule
-            type=ref,event=branch
+            type=event=branch
 
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
