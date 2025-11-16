@@ -24,7 +24,8 @@ jobs:
             ghcr.io/username/app
           # generate Docker tags based on the following events/attributes
           tags: |
-            type=branch
+            type=raw,value=mytag-{{branch}}
+
 
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
@@ -43,8 +44,8 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64
           push: true
-          # tags: ${{ steps.meta.outputs.tags }}
-          tags: ${{branch}}
+          tags: ${{ steps.meta.outputs.tags }}
+          # tags: ${{branch}}
         # run: |
         #   docker build . --tag ghcr.io/scrogatl/doodle-frontend:latest 
         #   docker push ghcr.io/scrogatl/doodle-frontend:latest
