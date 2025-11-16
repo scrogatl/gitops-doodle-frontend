@@ -14,7 +14,24 @@ jobs:
   build-push-frontend:
     runs-on: ubuntu-latest
     steps:
-      
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          # list of Docker images to use as base name for tags
+          images: |
+            name/app
+            ghcr.io/username/app
+          # generate Docker tags based on the following events/attributes
+          tags: |
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
+
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
     
@@ -32,7 +49,7 @@ jobs:
           file: ./iDockerfile
           platforms: linux/amd64
           push: true
-          tags: ghcr.io/scrogatl/doodle-frontend:${{ env.BRANCH }}
+          tags: ${{ steps.meta.outputs.tags }}
         # run: |
         #   docker build . --tag ghcr.io/scrogatl/doodle-frontend:latest 
         #   docker push ghcr.io/scrogatl/doodle-frontend:latest
