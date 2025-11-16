@@ -26,15 +26,15 @@ jobs:
           password: ${{secrets.GITHUB_TOKEN}}      
 
       - name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./iDockerfile
-          platforms: linux/amd64
-          push: true
-          tags: ghcr.io/scrogatl/doodle-frontend:${{ env.BRANCH }}
-          build-args: |
-           BRANCH=${{ env.BRANCH }}
-        # run: |
-        #   docker build . --tag ghcr.io/scrogatl/doodle-frontend:latest 
-        #   docker push ghcr.io/scrogatl/doodle-frontend:latest
+        # uses: docker/build-push-action@v2
+        # with:
+        #   context: .
+        #   file: ./iDockerfile
+        #   platforms: linux/amd64
+        #   push: true
+        #   tags: ghcr.io/scrogatl/doodle-frontend:${{ env.BRANCH }}
+        #   build-args: |
+        #    BRANCH=${{ env.BRANCH }}
+        run: |
+          docker build . --tag ghcr.io/scrogatl/doodle-frontend:latest 
+          docker push ghcr.io/scrogatl/doodle-frontend:latest
