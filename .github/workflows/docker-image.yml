@@ -33,7 +33,8 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: ghcr.io/scrogatl/doodle-frontend:${{ env.BRANCH }}
-          build-args: BRANCH=${{ env.BRANCH }
+          build-args: |
+           BRANCH=${{ env.BRANCH }
         # run: |
         #   docker build . --tag ghcr.io/scrogatl/doodle-frontend:latest 
         #   docker push ghcr.io/scrogatl/doodle-frontend:latest
