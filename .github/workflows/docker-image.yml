@@ -23,7 +23,7 @@ jobs:
             ghcr.io/scrogatl/doodle-frontend
           # generate Docker tags based on the following events/attributes
           tags: |
-            type=raw,value=mytag-{{branch}}
+            type=raw,value={{branch}}
 
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
@@ -33,7 +33,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{secrets.MY_TOKEN}}      
+          password: ${{secrets.GITHUB_TOKEN}}      
 
       - name: Build and push
         uses: docker/build-push-action@v6
