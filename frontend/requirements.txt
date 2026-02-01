@@ -1,5 +1,5 @@
 flask
 requests
-pentelemetry-distro 
+opentelemetry-distro 
 opentelemetry-exporter-otlp
 opentelemetry-bootstrap
