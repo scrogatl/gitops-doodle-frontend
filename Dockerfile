@@ -2,6 +2,8 @@ FROM python:3.10-slim-bullseye
 
 WORKDIR /frontend
 
+ENV NEW_RELIC_APP_NAME=doodle-frontend
+
 COPY frontend/requirements.txt /frontend/requirements.txt
 RUN pip3 install -r requirements.txt
 
