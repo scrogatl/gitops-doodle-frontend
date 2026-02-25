@@ -48,8 +48,10 @@ def front_end():
 
     if az_dns_suffix:
         req_url_hello = "https://" + helloHost + ".internal." + az_dns_suffix
+        logit(f"CONTAINER_APP_ENV_DNS_SUFFIX: {az_dns_suffix}")
     else:
         req_url_hello = 'http://' + helloHost + ':5001' + "?account=" + generate_acct_num()
+        logit(f"CONTAINER_APP_ENV_DNS_SUFFIX: NOT SET")
     try:
         logit(f"Attempting to connect to hello host at {req_url_hello}")
         resH = requests.get(req_url_hello)
