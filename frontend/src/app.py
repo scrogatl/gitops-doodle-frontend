@@ -55,6 +55,11 @@ def front_end():
         resH = requests.get(req_url_hello)
         httpStatus = resH.status_code
         res += "hello status: " + str(resH.status_code) + " - " + resH.text 
+
+        req_url_hello = 'http://' + helloHost + ':5001' + "/get_uuid"
+        resH = requests.get(req_url_hello)
+        res += " uuid: " + resH.text 
+
     except Exception as e:
         res += "hello status: " + repr(e)
 
