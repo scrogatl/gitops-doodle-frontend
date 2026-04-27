@@ -48,10 +48,12 @@ def front_end():
 
     if az_dns_suffix:
         req_url_hello = "https://" + helloHost + ".internal." + az_dns_suffix
+        logit(f"CONTAINER_APP_ENV_DNS_SUFFIX: {az_dns_suffix}")
     else:
         req_url_hello = 'http://' + helloHost + ':5001' + "?account=" + generate_acct_num()
+        logit(f"CONTAINER_APP_ENV_DNS_SUFFIX: NOT SET")
     try:
-        print(f"Attempting to connect to hello host at {req_url_hello}")
+        logit(f"Attempting to connect to hello host at {req_url_hello}")
         resH = requests.get(req_url_hello)
         httpStatus = resH.status_code
         res += "hello status: " + str(resH.status_code) + " - " + resH.text 
@@ -70,7 +72,7 @@ def front_end():
             lHost, lPort = which_world_to_call()
             logit(lHost + ":" + lPort)
             req_url_world = 'http://' + lHost + ':' + lPort
-        print(f"Attempting to connect to world host at {req_url_world}")
+        logit(f"Attempting to connect to world host at {req_url_world}")
         resW = requests.get(req_url_world)
         httpStatus = resW.status_code
         res += " | world status: " + str(resW.status_code) + " - " + resW.text 
