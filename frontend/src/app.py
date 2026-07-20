@@ -24,7 +24,7 @@ az_dns_suffix  = os.environ.get('CONTAINER_APP_ENV_DNS_SUFFIX')
 
 def logit(message):
     timeString = datetime.now().strftime("%H:%M:%S.%f")[:-3]
-    log.info(timeString + " - [frontend: " + shard + "] - " + message)
+    log.debug(timeString + " - [frontend: " + shard + "] - " + message)
     
 def generate_acct_num():
     r = randrange(10000)
@@ -41,6 +41,11 @@ def which_world_to_call():
 
 @app.route("/")
 def front_end():
+    logit("---- HEADERS BEGIN -----")
+    for header, value in request.headers.items():
+        logit(f"{header}: {value}")
+    logit("---- HEADERS END -----")
+    
     httpStatus = 200
     req_url_hello = ""
     req_url_world = ""
