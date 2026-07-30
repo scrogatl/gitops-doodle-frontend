@@ -20,6 +20,10 @@ worldPortRuby  = os.environ.get('WPORT_RUBY', "5002")
 shard          = os.environ.get('SHARD', "na")
 rubyWorld      = os.environ.get('RUBY_WORLD', "50")
 az_dns_suffix  = os.environ.get('CONTAINER_APP_ENV_DNS_SUFFIX')
+# Optional full base-URL overrides (scheme + host, no forced port) for targets
+# that don't fit the "host:port" model above, e.g. Azure Function Apps.
+helloUrl       = os.environ.get('HELLO_URL')
+worldUrl       = os.environ.get('WORLD_URL')
 
 
 def logit(message):
@@ -46,7 +50,9 @@ def front_end():
     req_url_world = ""
     res = ''
 
-    if az_dns_suffix:
+    if helloUrl:
+        req_url_hello = helloUrl.rstrip('/') + "?account=" + generate_acct_num()
+    elif az_dns_suffix:
         req_url_hello = "https://" + helloHost + ".internal." + az_dns_suffix
     else:
         req_url_hello = 'http://' + helloHost + ':5001' + "?account=" + generate_acct_num()
@@ -54,19 +60,21 @@ def front_end():
         print(f"Attempting to connect to hello host at {req_url_hello}")
         resH = requests.get(req_url_hello)
         httpStatus = resH.status_code
-        res += "hello status: " + str(resH.status_code) + " - " + resH.text 
+        res += "hello status: " + str(resH.status_code) + " - " + resH.text
 
-        req_url_hello = 'http://' + helloHost + ':5001' + "/get_uuid"
+        req_url_hello = (helloUrl.rstrip('/') + "/get_uuid") if helloUrl else ('http://' + helloHost + ':5001' + "/get_uuid")
         resH = requests.get(req_url_hello)
-        res += " uuid: " + resH.text 
+        res += " uuid: " + resH.text
 
     except Exception as e:
         res += "hello status: " + repr(e)
 
-    try: 
-        if az_dns_suffix:
+    try:
+        if worldUrl:
+            req_url_world = worldUrl
+        elif az_dns_suffix:
             req_url_world =  "https://" + worldHost + ".internal." + az_dns_suffix
-        else: 
+        else:
             lHost, lPort = which_world_to_call()
             logit(lHost + ":" + lPort)
             req_url_world = 'http://' + lHost + ':' + lPort

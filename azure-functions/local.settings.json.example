@@ -9,6 +9,8 @@
     "WPORT": "5002",
     "WPORT_RUBY": "5002",
     "SHARD": "azure-fn",
-    "RUBY_WORLD": "50"
+    "RUBY_WORLD": "50",
+    "HELLO_URL": "https://<hello-function-app-name>.azurewebsites.net",
+    "WORLD_URL": "https://<world-function-app-name>.azurewebsites.net"
   }
 }
