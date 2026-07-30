@@ -1,2 +1,6 @@
--r ../frontend/requirements.txt
+# Kept in sync manually with ../frontend/requirements.txt - can't use `-r
+# ../frontend/requirements.txt` here because Azure's remote build only
+# packages this directory, not sibling repo folders.
+flask
+requests
 azure-functions

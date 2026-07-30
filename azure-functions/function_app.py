@@ -1,12 +1,11 @@
-import os
-import sys
-
-# Reuse the existing Flask app object from frontend/src/app.py instead of
-# duplicating route/business logic for the Functions runtime.
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "frontend", "src"))
-
 import azure.functions as func
-from app import app as flask_app  # noqa: E402  (the Flask() instance in frontend/src/app.py)
+
+# frontend/src/app.py is copied to app.py (this directory) as a build step
+# before publishing/testing - see deploy.sh/test-local.sh. Azure's remote
+# build only packages this directory, not sibling repo folders, so the
+# source of truth stays in frontend/src/app.py but the deployed/tested
+# artifact needs its own local copy.
+from app import app as flask_app  # the Flask() instance from frontend/src/app.py
 
 func_app = func.FunctionApp()
 
