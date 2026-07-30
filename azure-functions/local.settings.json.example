@@ -1,0 +1,14 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "",
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "HELLO_HOST": "localhost",
+    "WORLD_HOST": "localhost",
+    "WORLD_HOST_RUBY": "localhost",
+    "WPORT": "5002",
+    "WPORT_RUBY": "5002",
+    "SHARD": "azure-fn",
+    "RUBY_WORLD": "50"
+  }
+}
