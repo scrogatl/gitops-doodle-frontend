@@ -11,6 +11,8 @@
     "SHARD": "azure-fn",
     "RUBY_WORLD": "50",
     "HELLO_URL": "https://<hello-function-app-name>.azurewebsites.net",
-    "WORLD_URL": "https://<world-function-app-name>.azurewebsites.net"
+    "WORLD_URL": "https://<world-function-app-name>.azurewebsites.net",
+    "NEW_RELIC_LICENSE_KEY": "<your-license-key>",
+    "NEW_RELIC_APP_NAME": "doodle-frontend-azure-fn"
   }
 }

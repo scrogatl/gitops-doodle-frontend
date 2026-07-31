@@ -1,3 +1,11 @@
+import newrelic.agent
+
+# Must run before importing app.py (which imports flask/requests) so the
+# agent's auto-instrumentation hooks are in place before those modules load.
+# No config file needed - reads NEW_RELIC_LICENSE_KEY / NEW_RELIC_APP_NAME
+# (and friends) directly from the Function App's settings/environment.
+newrelic.agent.initialize()
+
 import azure.functions as func
 
 # frontend/src/app.py is copied to app.py (this directory) as a build step
@@ -9,7 +17,9 @@ from app import app as flask_app  # the Flask() instance from frontend/src/app.p
 
 func_app = func.FunctionApp()
 
+wsgi_app = newrelic.agent.WSGIApplicationWrapper(flask_app.wsgi_app)
+
 
 @func_app.route(route="{*route}", auth_level=func.AuthLevel.ANONYMOUS)
 def frontend(req: func.HttpRequest, context: func.Context) -> func.HttpResponse:
-    return func.WsgiMiddleware(flask_app.wsgi_app).handle(req, context)
+    return func.WsgiMiddleware(wsgi_app).handle(req, context)
