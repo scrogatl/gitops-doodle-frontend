@@ -7,8 +7,15 @@ from time import sleep
 from random import randrange
 import logging
 
-log = logging.getLogger('werkzeug')
-log.setLevel(logging.DEBUG)
+# Instrumentation (New Relic / OpenTelemetry) is NOT done here: it is added by
+# the Docker build target and the launch command (see Dockerfile). This file is
+# the same for every flavor.
+
+# Log at INFO so records are picked up by New Relic log forwarding (default
+# forwarding level is INFO) and by the OpenTelemetry logging handler.
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger('frontend')
+log.setLevel(logging.INFO)
 
 app = Flask(__name__)
 
@@ -24,6 +31,7 @@ az_dns_suffix  = os.environ.get('CONTAINER_APP_ENV_DNS_SUFFIX')
 # that don't fit the "host:port" model above, e.g. Azure Function Apps.
 helloUrl       = os.environ.get('HELLO_URL')
 worldUrl       = os.environ.get('WORLD_URL')
+logHeaders     = os.environ.get('LOG_HEADERS', "true").lower() == "true"
 
 
 def logit(message):
@@ -45,6 +53,12 @@ def which_world_to_call():
 
 @app.route("/")
 def front_end():
+    if logHeaders:
+        logit("---- HEADERS BEGIN -----")
+        for header, value in request.headers.items():
+            logit(f"{header}: {value}")
+        logit("---- HEADERS END -----")
+
     httpStatus = 200
     req_url_hello = ""
     req_url_world = ""
@@ -57,7 +71,7 @@ def front_end():
     else:
         req_url_hello = 'http://' + helloHost + ':5001' + "?account=" + generate_acct_num()
     try:
-        print(f"Attempting to connect to hello host at {req_url_hello}")
+        logit(f"Attempting to connect to hello host at {req_url_hello}")
         resH = requests.get(req_url_hello)
         httpStatus = resH.status_code
         res += "hello status: " + str(resH.status_code) + " - " + resH.text
@@ -78,7 +92,7 @@ def front_end():
             lHost, lPort = which_world_to_call()
             logit(lHost + ":" + lPort)
             req_url_world = 'http://' + lHost + ':' + lPort
-        print(f"Attempting to connect to world host at {req_url_world}")
+        logit(f"Attempting to connect to world host at {req_url_world}")
         resW = requests.get(req_url_world)
         httpStatus = resW.status_code
         res += " | world status: " + str(resW.status_code) + " - " + resW.text 
