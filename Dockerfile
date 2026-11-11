@@ -1,15 +1,29 @@
-FROM python:3.10-slim-bullseye 
-
+# One Dockerfile, three images. Pick the flavor with --target:
+#   plain     no agent
+#   newrelic  New Relic Python agent (newrelic-admin)
+#   otel      OpenTelemetry auto-instrumentation (opentelemetry-instrument)
+FROM python:3.10-slim-bullseye AS base
 WORKDIR /frontend
-
-ENV NEW_RELIC_APP_NAME=doodle-frontend
-
 COPY frontend/requirements.txt /frontend/requirements.txt
-RUN pip3 install -r requirements.txt
-
+RUN pip3 install --no-cache-dir -r requirements.txt
 EXPOSE 5000
 
+FROM base AS plain
 COPY frontend/src/ /frontend
-CMD ["flask","run", "--host=0.0.0.0", "-p 5000"]
-# CMD newrelic-admin run-program flask run --host=0.0.0.0 -p 5000
-# CMD opentelemetry-instrument --logs_exporter otlp flask run --debugger --host=0.0.0.0 -p 5000
+CMD ["flask", "run", "--host=0.0.0.0", "-p", "5000"]
+
+FROM base AS newrelic
+COPY frontend/requirements-newrelic.txt /frontend/requirements-newrelic.txt
+RUN pip3 install --no-cache-dir -r requirements-newrelic.txt
+COPY frontend/src/ /frontend
+ENV NEW_RELIC_APP_NAME=doodle-frontend \
+    NEW_RELIC_DISTRIBUTED_TRACING_ENABLED=true
+CMD ["newrelic-admin", "run-program", "flask", "run", "--host=0.0.0.0", "-p", "5000"]
+
+FROM base AS otel
+COPY frontend/requirements-otel.txt /frontend/requirements-otel.txt
+RUN pip3 install --no-cache-dir -r requirements-otel.txt \
+ && opentelemetry-bootstrap -a install
+COPY frontend/src/ /frontend
+ENV OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED=true
+CMD ["opentelemetry-instrument", "flask", "run", "--host=0.0.0.0", "-p", "5000"]
